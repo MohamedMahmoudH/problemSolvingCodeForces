@@ -11,14 +11,18 @@ void solve()
     string str1 , str2;
     cin >> str1 >> str2;
 
-    short size1 = str1.size() , size2 = str2.size();
+    int size1 = str1.size() , size2 = str2.size() , Max = 0;
     loop(i,0,size2)
     {
-        auto it = str1.find(str2[i]);
-        if(it != string::npos)str1.erase(it , 1);
-        else size1++;
+        int j = 0 , k = i;
+        while(j < size1 && k < size2)
+        {
+            if(str1[j] == str2[k])k++;
+            j++;
+        }
+        Max = max(Max , k - i);
     }
-    cout << size1 << '\n';
+    cout << size1 + size2 - Max << '\n';
 }
 
 short t;
@@ -29,3 +33,10 @@ int main()
     while(t--)solve();
     return 0;
 }
+
+/*
+the previous idea not consider position of char 
+when input : asd dsa
+the output : 3
+the correct output is : 5
+*/
