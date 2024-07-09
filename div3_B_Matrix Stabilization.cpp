@@ -1,71 +1,38 @@
-/* HACKED */
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#define loop(i,a,b) for(int i = a ; i < b ; ++i)
-#define all(x) (x).begin() , (x).end()
+#define ByMohamedMahmoud ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
+#define loop(i,a,b) for(int i = a ; i <  b ; ++i)
 using namespace std;
-
-short n , m;
-int x = 1;
-void who(int **arr)
-{
-    x = 0;
-    loop(i,1,n+1)
-    {
-        loop(j,1,m+1)
-        {
-            x = arr[i][j];
-            if(x > arr[i-1][j] && x > arr[i+1][j] && x > arr[i][j-1] && x > arr[i][j+1])
-            {
-                arr[i][j] = max(max(arr[i-1][j] ,  arr[i+1][j]) , max(arr[i][j-1] , arr[i][j+1]));
-                who(arr);
-            }
-        }
-    }
-    x = 0;
-}
 
 void solve()
 {
+    int n, m;
     cin >> n >> m;
+    vector<vector<int>> v(n, vector<int>(m));
 
-    int** arr = new int*[n+2];
-    loop(i, 0, n+2)
+    loop(i,0,n)loop(j,0,m)cin >> v[i][j];;
+    loop(i,0,n)
     {
-        arr[i] = new int[m+2]();
-    }
-
-    loop(i,1,n+1)
-    {
-        loop(j,1,m+1)
+        loop(j,0,m)
         {
-            cin >> arr[i][j];
-        }
-    }
-    who(arr);
-    loop(i,1,n+1)
-    {
-        loop(j,1,m+1)
-        {
-            cout << arr[i][j] << ' ';
+            int mx = 0;
+            if (i > 0) mx = max(mx, v[i - 1][j]);
+            if (i < n - 1) mx = max(mx, v[i + 1][j]);
+            if (j > 0) mx = max(mx, v[i][j - 1]);
+            if (j < m - 1) mx = max(mx, v[i][j + 1]);
+            if (mx != 0 && v[i][j] > mx) v[i][j] = mx;
+            cout << v[i][j] << ' ';
         }
         cout << '\n';
     }
-
-    loop(i, 0, n+2)
-    {
-        delete[] arr[i];
-    }
-    delete[] arr;
-
 }
 
+short t;
 int main()
 {
     ///ByMohamedMahmoud///
-    short t = 1;
     cin >> t;
-    while(t--)solve();
+    while (t--)solve();
     return 0;
 }
