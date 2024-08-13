@@ -29,6 +29,7 @@ void sparseTable()
     while(q--)
     {
         cin >> l >> r;
+        //--l;--r; : if l , r one based indexes
         int msk = (int)log2(r - l + 1);
         cout << merge(sparse[msk][l] , sparse[msk][r - (1 << msk) + 1]) << '\n';
     }
