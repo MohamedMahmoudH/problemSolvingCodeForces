@@ -25,6 +25,7 @@ void sparseTable()
             sparse[msk][i] = merge(sparse[msk - 1][i] , sparse[msk - 1][i + (1 << msk - 1)]);
     
     int q , l , r;
+    cin >> q;
     while(q--)
     {
         cin >> l >> r;
